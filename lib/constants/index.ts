@@ -5,8 +5,8 @@ export const LATEST_PRODUCTS_LIMIT =
  Number(process.env.LATEST_PRODUCTS_LIMIT) || 4;
 
  export const signInDefaultValues = {
-  email: '',
-  password: '',
+  email: 'admin@example.com',
+  password: '123456',
  }; 
  
  export const signUpDefaultValues = {
@@ -31,4 +31,4 @@ export const PAYMENT_METHODS = process.env.PAYMENT_METHODS
   process.env.DEFAULT_PAYMENT_METHOD || 'PayPal';
 
 
-export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 2;
+export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 12;

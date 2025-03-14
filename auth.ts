@@ -86,6 +86,7 @@ export const config = {
             data: { name: token.name },
           });
         }
+      
 
         if (trigger === 'signIn' || trigger === 'signUp') {
           const cookiesObject = await cookies();
