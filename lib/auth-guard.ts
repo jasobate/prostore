@@ -8,5 +8,5 @@ export async function requireAdmin() {
     redirect('/unauthorized')
   }
 
-  return session
+  return session;
 }
