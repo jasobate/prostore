@@ -1,19 +1,18 @@
-import { Metadata } from "next";
-import { getOrderById } from "@/lib/actions/order.actions";
-import { notFound } from "next/navigation";
-import OrderDetailsTable from "./order-details-table";
-import { ShippingAddress } from "@/types";
-import { auth } from "@/auth";
+import { Metadata } from 'next';
+import { getOrderById } from '@/lib/actions/order.actions';
+import { notFound, redirect } from 'next/navigation';
+import OrderDetailsTable from './order-details-table';
+import { ShippingAddress } from '@/types';
+import { auth } from '@/auth';
 import Stripe from 'stripe';
 
 export const metadata: Metadata = {
   title: 'Order Details',
-}
-
+};
 
 const OrderDetailsPage = async (props: {
   params: Promise<{
-    id: string
+    id: string;
   }>;
 }) => {
   const { id } = await props.params;
@@ -22,6 +21,11 @@ const OrderDetailsPage = async (props: {
   if (!order) notFound();
 
   const session = await auth();
+
+  // Redirect the user if they don't own the order
+  if (order.userId !== session?.user.id && session?.user.role !== 'admin') {
+    return redirect('/unauthorized');
+  }
 
   let client_secret = null;
 
@@ -50,5 +54,5 @@ const OrderDetailsPage = async (props: {
     />
   );
 };
- 
+
 export default OrderDetailsPage;
