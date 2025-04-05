@@ -36,6 +36,7 @@ const OrderDetailsTable = ({
   isAdmin,
   stripeClientSecret,
 }: {
+  // order: Order;
   order: Omit<Order, 'paymentResult'>;
   paypalClientId: string;
   isAdmin: boolean;
@@ -53,10 +54,10 @@ const OrderDetailsTable = ({
     isDelivered,
     isPaid,
     paidAt,
-    deliveredAt
-   } = order;
+    deliveredAt,
+  } = order;
 
-   const { toast } = useToast();
+  const { toast } = useToast();
 
    const PrintLoadingState = () => {
     const [{ isPending, isRejected }] = usePayPalScriptReducer();
