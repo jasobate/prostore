@@ -250,24 +250,24 @@ export async function updateOrderToPaid({
     });
   });
 
-  // Get updated order after transaction
+   // Get updated order after transaction
    const updatedOrder = await prisma.order.findFirst({
     where: { id: orderId },
     include: {
       orderitems: true,
-      user: { select: {name: true, email: true} }
+      user: { select: { name: true, email: true } },
     },
-   });
+  });
 
-   if(!updatedOrder) throw new  Error('Order not found');
+  if (!updatedOrder) throw new Error('Order not found');
 
-   sendPurchaseReceipt({
+  sendPurchaseReceipt({
     order: {
       ...updatedOrder,
       shippingAddress: updatedOrder.shippingAddress as ShippingAddress,
       paymentResult: updatedOrder.paymentResult as PaymentResult,
     },
-   });
+  });
 }
 
 // Get user's orders
